@@ -33,15 +33,23 @@ namespace ArexxMatrix {
             basic.pause(delayTime)
         }
     }
+
+    /**
+     * Converts red, green, blue channels into a RGB color
+     * @param red value of the red channel between 0 and 255. eg: 255
+     * @param green value of the green channel between 0 and 255. eg: 255
+     * @param blue value of the blue channel between 0 and 255. eg: 255
+     */
     //% weight=1
     //% blockId="Matrix_rgb" block="red %red|green %green|blue %blue"
-    //% red.min=0 red.max=255 green.min=0 green.max=255 blue.min=0 blue.max=255
     //% advanced=true
-    export function rgb(red: number=255, green: number=255, blue: number=255): number {
-        let colourValue = ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF)
-        return colourValue;
+    export function rgb(red: number, green: number, blue: number): number {
+        return packRGB(red, green, blue);
     }
 
+    function packRGB(a: number, b: number, c: number): number {
+        return ((a & 0xFF) << 16) | ((b & 0xFF) << 8) | (c & 0xFF);
+    }
 
 
     function getLettermap(l: string) {
