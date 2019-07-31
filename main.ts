@@ -33,6 +33,10 @@ namespace ArexxMatrix {
             basic.pause(delayTime)
         }
     }
+    //%block setPoint.max=255 setPoint.min=0 setPoint.defl=128
+    export function Brightness(setPoint: number){
+        matrix.setBrightness(setPoint)
+    }
 
     /**
      * Converts red, green, blue channels into a RGB color
