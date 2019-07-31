@@ -43,6 +43,7 @@ namespace ArexxMatrix {
     //% weight=1
     //% blockId="Matrix_rgb" block="red %red|green %green|blue %blue"
     //% advanced=true
+    //%red.defl=255 blue.defl=255 green.defl=255
     export function rgb(red: number, green: number, blue: number): number {
         return packRGB(red, green, blue);
     }
