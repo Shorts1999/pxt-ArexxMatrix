@@ -13,12 +13,16 @@ namespace ArexxMatrix {
                         let letterMap = getLettermap(data.charAt(i))
                         if (!((Xpos + k) % 2)) {
                             for (let j = 0; j < 8; j++) {
-                                matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), (((letterMap[j] & (0x10 >> k)) * colour)))
+                                if ((letterMap[j] & (0x10 >> k))) {
+                                    matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), ((colour)))
+                                }
                             }
                         }
                         else {
                             for (let j = 0; j < 8; j++) {
-                                matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), (((letterMap[j] & (0x10 >> k)) * colour)))
+                                if ((letterMap[j] & (0x10 >> k))) {
+                                    matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), ((colour)))
+                                }
                             }
                         }
                     }
