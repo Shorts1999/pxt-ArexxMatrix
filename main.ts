@@ -4,7 +4,7 @@ let matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
 namespace ArexxMatrix {
     //% block="Scroll text %data met wachttijd %delayTime en kleur %colour"
     //% colour.shadow="Matrix_rgb"
-
+    //% delayTime.min=0 delayTime.max=2000 colour.min=0x000000 colour.max=0xFFFFFF
     export function scrollText(data: string, delayTime: number, colour: number): void {
         for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
             for (let i = 0; i < data.length; i++) {
