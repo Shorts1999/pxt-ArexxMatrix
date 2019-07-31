@@ -33,7 +33,8 @@ namespace ArexxMatrix {
             basic.pause(delayTime)
         }
     }
-    //%block setPoint.max=255 setPoint.min=0 setPoint.defl=128
+    //%block="set Matrix brightness (0-255)" setPoint.max=255 setPoint.min=0 setPoint.defl=128
+    //% 
     export function Brightness(setPoint: number){
         matrix.setBrightness(setPoint)
     }
