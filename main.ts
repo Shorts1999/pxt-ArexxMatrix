@@ -1,11 +1,18 @@
 let matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
-//% color=#AA00AA weight=50 icon="\f2a1" block="Arexx Matrix"
+//% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
-    //% block="Scroll text %data met wachttijd %delayTime en kleur %colour"
+    enum Directions {
+        //%block="links"
+        links = 0,
+        //%block="rechts"
+        rechts = 1
+    }
+    //% block="Scroll text %data met wachttijd %delayTime en kleur %colour. scroll naar %direction"
     //% colour.shadow="Matrix_rgb"
-    //% delayTime.min=0 delayTime.max=2000 
-    export function scrollText(data: string, delayTime: number, colour: number): void {
+    //% delayTime.min=0 delayTime.max=2000
+    export function scrollText(data: string, delayTime: number, colour: number, direction: Directions): void {
+        if(direction == 0){
         for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
             for (let i = 0; i < data.length; i++) {
                 for (let k = 0; k < 5; k++) {
@@ -31,6 +38,35 @@ namespace ArexxMatrix {
             matrix.show()
             matrix.clear()
             basic.pause(delayTime)
+        }
+        }
+        else {
+            for (let Xpos = 0; Xpos < (32+data.length * 6); Xpos++) {
+                for (let i = 0; i < data.length; i++) {
+                    for (let k = 0; k < 5; k++) {
+                        if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
+                            let letterMap = getLettermap(data.charAt(i))
+                            if (!((Xpos + k) % 2)) {
+                                for (let j = 0; j < 8; j++) {
+                                    if ((letterMap[j] & (0x10 >> k))) {
+                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), ((colour)))
+                                    }
+                                }
+                            }
+                            else {
+                                for (let j = 0; j < 8; j++) {
+                                    if ((letterMap[j] & (0x10 >> k))) {
+                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), ((colour)))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                matrix.show()
+                matrix.clear()
+                basic.pause(delayTime)
+            }
         }
     }
     //%block="set Matrix brightness (0-255) %setPoint" setPoint.max=255 setPoint.min=0 setPoint.defl=128
