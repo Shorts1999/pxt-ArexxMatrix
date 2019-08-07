@@ -69,6 +69,16 @@ namespace ArexxMatrix {
             }
         }
     }
+    /**
+    * Gets the direction to scroll in
+    */
+    //% weight=2 blockGap=8
+    //% blockId="ArexxMatrix_Direction" block="%Direction"
+    //% advanced=true
+    export function Direction(direction: Directions): number {
+        return direction;
+    }
+    
     //%block="set Matrix brightness (0-255) %setPoint" setPoint.max=255 setPoint.min=0 setPoint.defl=128
     //% 
     export function Brightness(setPoint: number) {
