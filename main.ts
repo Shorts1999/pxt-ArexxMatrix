@@ -14,40 +14,40 @@ namespace ArexxMatrix {
     //% colour.shadow="Matrix_rgb"
     //% delayTime.min=0 delayTime.max=2000
     export function scrollText(data: string, delayTime: number, colour: number, direction: number): void {
-        if(direction == 0){
-        for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
-            for (let i = 0; i < data.length; i++) {
-                for (let k = 0; k < 5; k++) {
-                    if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
-                        let letterMap = getLettermap(data.charAt(i))
-                        if (!((Xpos + k) % 2)) {
-                            for (let j = 0; j < 8; j++) {
-                                if ((letterMap[j] & (0x10 >> k))) {
-                                    matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), ((colour)))
+        if (direction == 0) {
+            for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
+                for (let i = 0; i < data.length; i++) {
+                    for (let k = 0; k < 5; k++) {
+                        if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
+                            let letterMap = getLettermap(data.charAt(i))
+                            if (!((Xpos + k) % 2)) {
+                                for (let j = 0; j < 8; j++) {
+                                    if ((letterMap[j] & (0x10 >> k))) {
+                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), ((colour)))
+                                    }
                                 }
                             }
-                        }
-                        else {
-                            for (let j = 0; j < 8; j++) {
-                                if ((letterMap[j] & (0x10 >> k))) {
-                                    matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), ((colour)))
+                            else {
+                                for (let j = 0; j < 8; j++) {
+                                    if ((letterMap[j] & (0x10 >> k))) {
+                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), ((colour)))
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                matrix.show()
+                matrix.clear()
+                basic.pause(delayTime)
             }
-            matrix.show()
-            matrix.clear()
-            basic.pause(delayTime)
-        }
         }
         else {
-            for (let Xpos = 0; Xpos < (32+data.length * 6); Xpos++) {
-                for (let i = 0; i < data.length; i++) {
+            for (let Xpos = -(data.length * 6); Xpos < 32; Xpos++) {
+                for (let i = data.length; i > 0; i--) {
                     for (let k = 0; k < 5; k++) {
                         if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
-                            let letterMap = getLettermap(data.charAt(i))
+                            let letterMap = getLettermap(data.charAt(i - 1))
                             if (!((Xpos + k) % 2)) {
                                 for (let j = 0; j < 8; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
@@ -94,7 +94,7 @@ namespace ArexxMatrix {
      * @param blue value of the blue channel between 0 and 255. eg: 255
      */
     //% weight=1
-    //% blockId="Matrix_rgb" block="red %red|green %green|blue %blue"
+    //% blockId="Matrix_rgb" block="rood %red|groen %green|blauw %blue"
     //% advanced=true
     //%red.defl=255 blue.defl=255 green.defl=255
     export function rgb(red: number, green: number, blue: number): number {
