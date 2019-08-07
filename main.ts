@@ -1,17 +1,19 @@
 let matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
+enum Directions {
+    //% block=links
+    links = 0,
+    //% block=rechts
+    rechts = 1
+}
+
 //% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
-    enum Directions {
-        //%block="links"
-        links = 0,
-        //%block="rechts"
-        rechts = 1
-    }
-    //% block="Scroll text %data met wachttijd %delayTime en kleur %colour scroll naar %direction"
+
+    //% block="Scroll text %data met wachttijd %delayTime en kleur %colour scroll naar %direction=ArexxMatrix_Direction"
     //% colour.shadow="Matrix_rgb"
     //% delayTime.min=0 delayTime.max=2000
-    export function scrollText(data: string, delayTime: number, colour: number, direction: Directions): void {
+    export function scrollText(data: string, delayTime: number, colour: number, direction: number): void {
         if(direction == 0){
         for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
             for (let i = 0; i < data.length; i++) {
@@ -73,12 +75,12 @@ namespace ArexxMatrix {
     * Gets the direction to scroll in
     */
     //% weight=2 blockGap=8
-    //% blockId="ArexxMatrix_Direction" block="%Direction"
+    //% blockId="ArexxMatrix_Direction" block="%direction"
     //% advanced=true
     export function Direction(direction: Directions): number {
         return direction;
     }
-    
+
     //%block="set Matrix brightness (0-255) %setPoint" setPoint.max=255 setPoint.min=0 setPoint.defl=128
     //% 
     export function Brightness(setPoint: number) {
