@@ -9,16 +9,34 @@ enum Directions {
 //% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
+
+    /**
+     * Ingevoerde displaywijzigingen doorvoeren
+     */
+    //%block="Matrix wijzigingen weergeven"
+    export function show():void{
+        matrix.show()
+    }
+    /**
+     * alle lichtjes van de matrix uitzetten
+     */
+    //% block="Matrix legen"
+    //% weight=1
+    export function legen():void {
+        matrix.clear()
+        matrix.show()
+    }
     
     /**
     * Zet een pixel op deze positie naar een bepaalde kleur.
-    * Let op! De pixels worden pas weergeven na het aanroepen van "show matrix" uit de neopixel uitbreiding!
+    * Let op! De pixels gaan pas aan na het blok "Matrix wijzigingen weergeven"
     */
     //% block="Zet pixel op positie x %x| y %y| op kleur %colour"
     //% colour.shadow="Matrix_rgb"
+    //% weight=100
     export function setPixel(x:number, y:number, colour:number){
         //oneven rijen gaan van boven naar beneden geteld:
-        if((x%2)){
+        if(!(x%2)){
             matrix.setPixelColor((y+8*x), colour)
         }
         else{
@@ -27,6 +45,7 @@ namespace ArexxMatrix {
     }
     //% block="Scroll text %data met wachttijd %delayTime en kleur %colour scroll naar %direction=ArexxMatrix_Direction"
     //% colour.shadow="Matrix_rgb"
+    //% weight=95
     //% delayTime.min=0 delayTime.max=2000
     export function scrollText(data: string, delayTime: number, colour: number, direction: number): void {
         matrix.clear()
