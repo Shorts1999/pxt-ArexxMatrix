@@ -10,7 +10,7 @@ namespace ArexxMatrix {
     }
     //% block="Scroll text %data met wachttijd %delayTime en kleur %colour. scroll naar %direction"
     //% colour.shadow="Matrix_rgb"
-    //% delayTime.min=0 delayTime.max=2000
+    //% delayTime.min=0 delayTime.max=2000 direction="ArexxMatrix_Direction"
     export function scrollText(data: string, delayTime: number, colour: number, direction: Directions): void {
         if(direction == 0){
         for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
