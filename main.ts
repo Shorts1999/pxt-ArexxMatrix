@@ -1,4 +1,4 @@
-let matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
+
 enum Directions {
     //% block=links
     links = 0,
@@ -9,6 +9,19 @@ enum Directions {
 //% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
+    let matrix:neopixel.Strip
+    
+    /** 
+     * genereert het neopixel object, wanneer deze nog niet bestaat
+     */
+    //%block="maak matrix"
+    //%weight=100
+    export function createMatrix(): neopixel.Strip{
+        if(!matrix){
+            let matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
+        }
+        return matrix
+    }
 
     /**
      * Ingevoerde displaywijzigingen doorvoeren
