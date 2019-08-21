@@ -9,25 +9,25 @@ enum Directions {
 //% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
-    let matrix:neopixel.Strip
+    let matrix:neopixel.Strip;
     
     /** 
      * genereert het neopixel object, wanneer deze nog niet bestaat
      */
     //%block="maak matrix"
     //%weight=100
-    export function createMatrix(): neopixel.Strip{
+    export function createMatrix(): void{
         if(!matrix){
-            let matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
+            matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
+            ArexxMatrix.Brightness(32)
         }
-        return matrix
     }
 
     /**
      * Ingevoerde displaywijzigingen doorvoeren
      */
     //%block="Matrix wijzigingen weergeven"
-    export function show():void{
+    export function showMatrix():void{
         matrix.show()
     }
     /**
