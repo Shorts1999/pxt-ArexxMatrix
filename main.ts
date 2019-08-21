@@ -10,16 +10,19 @@ enum Directions {
 //% groups=['LED matrix']
 namespace ArexxMatrix {
     let matrix:neopixel.Strip;
-    
+    let MatrixHeigth:number
+    let MatrixWidth:number
     /** 
      * genereert het neopixel object, wanneer deze nog niet bestaat
      */
     //%block="maak matrix"
     //%weight=100
-    export function createMatrix(): void{
+    export function createMatrix(Heigth:number=8, Width:number=32): void{
         if(!matrix){
             matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
             ArexxMatrix.Brightness(32)
+            MatrixHeigth=Heigth
+            MatrixWidth=Width
         }
     }
 
@@ -50,10 +53,10 @@ namespace ArexxMatrix {
     export function setPixel(x:number, y:number, colour:number){
         //oneven rijen gaan van boven naar beneden geteld:
         if(!(x%2)){
-            matrix.setPixelColor((y+8*x), colour)
+            matrix.setPixelColor((y+MatrixHeigth*x), colour)
         }
         else{
-            matrix.setPixelColor(((7-y)+8*x), colour)
+            matrix.setPixelColor(((7-y)+MatrixHeigth*x), colour)
         }
     }
     //% block="Scroll text %data met wachttijd %delayTime en kleur %colour scroll naar %direction=ArexxMatrix_Direction"
@@ -70,16 +73,16 @@ namespace ArexxMatrix {
                         if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
                             let letterMap = getLettermap(data.charAt(i))
                             if (!((Xpos + k) % 2)) {
-                                for (let j = 0; j < 8; j++) {
+                                for (let j = 0; j < MatrixHeigth; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + j+(MatrixHeigth-8)/2) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
                             else {
-                                for (let j = 0; j < 8; j++) {
+                                for (let j = 0; j < MatrixHeigth; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7+(MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
@@ -98,16 +101,16 @@ namespace ArexxMatrix {
                         if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
                             let letterMap = getLettermap(data.charAt(i - 1))
                             if (!((Xpos + k) % 2)) {
-                                for (let j = 0; j < 8; j++) {
+                                for (let j = 0; j < MatrixHeigth; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + j) + (i * 8 * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + j + (MatrixHeigth - 8) / 2) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
                             else {
-                                for (let j = 0; j < 8; j++) {
+                                for (let j = 0; j < MatrixHeigth; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * 8) + (Xpos * 8) + (7 - j)) + (i * 8 * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7+(MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
