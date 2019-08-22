@@ -63,6 +63,8 @@ namespace ArexxMatrix {
     //% colour.shadow="Matrix_rgb"
     //% weight=100
     export function setPixel(x:number, y:number, colour:number){
+        if(x>=MatrixWidth){x=MatrixWidth-1}
+        if(y>=MatrixHeigth){y=MatrixHeigth-1}
         //oneven rijen gaan van boven naar beneden geteld:
         if(!(x%2)){
             matrix.setPixelColor((y+MatrixHeigth*x), colour)
