@@ -15,21 +15,35 @@ namespace ArexxMatrix {
     /** 
      * genereert het neopixel object, wanneer deze nog niet bestaat
      */
-    //%block="maak matrix"
+    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode|"
     //%weight=100
-    export function createMatrix(Heigth:number=8, Width:number=32): void{
+    //% Heigth.defl=8 Width.defl=32
+    export function createMatrix(Heigth:number=8, Width:number=32, mode:NeoPixelMode): void{
         if(!matrix){
-            matrix = neopixel.create(DigitalPin.P0, 256, NeoPixelMode.RGB)
+            matrix = neopixel.create(DigitalPin.P0, 256, mode)
             ArexxMatrix.Brightness(32)
             MatrixHeigth=Heigth
             MatrixWidth=Width
         }
+    }
+    //%block
+    //%advanced=true
+    //%weight=1
+    export function getWidth(){
+        return MatrixWidth
+    }
+    //%block
+    //%advanced=true
+    //%weigth=1
+    export function getHeigth(){
+        return MatrixHeigth
     }
 
     /**
      * Ingevoerde displaywijzigingen doorvoeren
      */
     //%block="Matrix wijzigingen weergeven"
+    //%weigth=50
     export function showMatrix():void{
         matrix.show()
     }
@@ -37,7 +51,7 @@ namespace ArexxMatrix {
      * alle lichtjes van de matrix uitzetten
      */
     //% block="Matrix legen"
-    //% weight=1
+    //% weight=40
     export function legen():void {
         matrix.clear()
         matrix.show()
@@ -56,7 +70,7 @@ namespace ArexxMatrix {
             matrix.setPixelColor((y+MatrixHeigth*x), colour)
         }
         else{
-            matrix.setPixelColor(((7-y)+MatrixHeigth*x), colour)
+            matrix.setPixelColor(((MatrixHeigth-1-y)+MatrixHeigth*x), colour)
         }
     }
     //% block="Scroll text %data met wachttijd %delayTime en kleur %colour scroll naar %direction=ArexxMatrix_Direction"
@@ -67,20 +81,21 @@ namespace ArexxMatrix {
         matrix.clear()
         matrix.show()
         if (direction == 0) {
-            for (let Xpos = 32; Xpos > -(data.length * 6); Xpos--) {
+            for (let Xpos = MatrixWidth; Xpos > -(data.length * 6); Xpos--) {
                 for (let i = 0; i < data.length; i++) {
                     for (let k = 0; k < 5; k++) {
                         if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
                             let letterMap = getLettermap(data.charAt(i))
+                            //checking for odd or even row, to depend pixel direction (zigzag pattern)
                             if (!((Xpos + k) % 2)) {
-                                for (let j = 0; j < MatrixHeigth; j++) {
+                                for (let j = 0; j < 8; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
                                         matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + j+(MatrixHeigth-8)/2) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
                             else {
-                                for (let j = 0; j < MatrixHeigth; j++) {
+                                for (let j = 0; j < 8; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
                                         matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7+(MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
                                     }
@@ -95,7 +110,7 @@ namespace ArexxMatrix {
             }
         }
         else {
-            for (let Xpos = -(data.length * 6); Xpos < 32; Xpos++) {
+            for (let Xpos = -(data.length * 6); Xpos < MatrixWidth; Xpos++) {
                 for (let i = data.length; i > 0; i--) {
                     for (let k = 0; k < 5; k++) {
                         if ((Xpos + (i * 6) > -6 && ((Xpos + (i * 6)) < 32))) {
