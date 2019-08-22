@@ -26,7 +26,18 @@ namespace ArexxMatrix {
             MatrixWidth=Width
         }
     }
-
+    //%block
+    //%advanced=true
+    //%weigth=1
+    export function getWidth(){
+        return MatrixWidth
+    }
+    //%block
+    //%advanced=true
+    //%weigth=1
+    export function getHeigth(){
+        return MatrixHeigth
+    }
     /**
      * Ingevoerde displaywijzigingen doorvoeren
      */
