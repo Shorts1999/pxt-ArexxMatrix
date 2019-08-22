@@ -9,40 +9,40 @@ enum Directions {
 //% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
-    let matrix:neopixel.Strip;
-    let MatrixHeigth:number
-    let MatrixWidth:number
+    let matrix: neopixel.Strip;
+    let MatrixHeigth: number
+    let MatrixWidth: number
     /** 
      * genereert het neopixel object, wanneer deze nog niet bestaat
      */
-    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGb type %mode"
+    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode"
     //%weight=100
     //% Heigth.defl=8 Width.defl=32
-    export function createMatrix(Heigth:number=8, Width:number=32, mode:NeoPixelMode): void{
-        if(!matrix){
-            matrix = neopixel.create(DigitalPin.P0, Heigth*Width, mode)
+    export function createMatrix(Heigth: number = 8, Width: number = 32, mode: NeoPixelMode): void {
+        if (!matrix) {
+            matrix = neopixel.create(DigitalPin.P0, Heigth * Width, mode)
             ArexxMatrix.Brightness(32)
-            MatrixHeigth=Heigth
-            MatrixWidth=Width
+            MatrixHeigth = Heigth
+            MatrixWidth = Width
         }
     }
     //%block
     //%advanced=true
     //%weigth=1
-    export function getWidth(){
+    export function getWidth() {
         return MatrixWidth
     }
     //%block
     //%advanced=true
     //%weigth=1
-    export function getHeigth(){
+    export function getHeigth() {
         return MatrixHeigth
     }
     /**
      * Ingevoerde displaywijzigingen doorvoeren
      */
     //%block="Matrix wijzigingen weergeven"
-    export function showMatrix():void{
+    export function showMatrix(): void {
         matrix.show()
     }
     /**
@@ -50,11 +50,11 @@ namespace ArexxMatrix {
      */
     //% block="Matrix legen"
     //% weight=1
-    export function legen():void {
+    export function legen(): void {
         matrix.clear()
         matrix.show()
     }
-    
+
     /**
     * Zet een pixel op deze positie naar een bepaalde kleur.
     * Let op! De pixels gaan pas aan na het blok "Matrix wijzigingen weergeven"
@@ -62,15 +62,15 @@ namespace ArexxMatrix {
     //% block="Zet pixel op positie x %x| y %y| op kleur %colour"
     //% colour.shadow="Matrix_rgb"
     //% weight=100
-    export function setPixel(x:number, y:number, colour:number){
-        if(x>=MatrixWidth){x=MatrixWidth-1}
-        if(y>=MatrixHeigth){y=MatrixHeigth-1}
+    export function setPixel(x: number, y: number, colour: number) {
+        if (x >= MatrixWidth) { x = MatrixWidth - 1 }
+        if (y >= MatrixHeigth) { y = MatrixHeigth - 1 }
         //oneven rijen gaan van boven naar beneden geteld:
-        if(!(x%2)){
-            matrix.setPixelColor((y+MatrixHeigth*x), colour)
+        if (!(x % 2)) {
+            matrix.setPixelColor((y + MatrixHeigth * x), colour)
         }
-        else{
-            matrix.setPixelColor(((MatrixHeigth-1-y)+MatrixHeigth*x), colour)
+        else {
+            matrix.setPixelColor(((MatrixHeigth - 1 - y) + MatrixHeigth * x), colour)
         }
     }
     //% block="Scroll text %data met wachttijd %delayTime en kleur %colour scroll naar %direction=ArexxMatrix_Direction"
@@ -90,14 +90,14 @@ namespace ArexxMatrix {
                             if (!((Xpos + k) % 2)) {
                                 for (let j = 0; j < 8; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + j+(MatrixHeigth-8)/2) + (i * MatrixHeigth * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + j + (MatrixHeigth - 8) / 2) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
                             else {
                                 for (let j = 0; j < 8; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7+(MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7 + (MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
@@ -125,7 +125,7 @@ namespace ArexxMatrix {
                             else {
                                 for (let j = 0; j < MatrixHeigth; j++) {
                                     if ((letterMap[j] & (0x10 >> k))) {
-                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7+(MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
+                                        matrix.setPixelColor(((k * MatrixHeigth) + (Xpos * MatrixHeigth) + (7 + (MatrixHeigth - 8) / 2 - j)) + (i * MatrixHeigth * 6), ((colour)))
                                     }
                                 }
                             }
@@ -137,6 +137,34 @@ namespace ArexxMatrix {
                 basic.pause(delayTime)
             }
         }
+    }
+
+    /**
+     * Draws a bitmap on the matrix
+     */
+    //%block
+    //%advanced=true
+    //%colour.shadow="Matrix_rgb"
+    //%weigth=100
+    //%xoffset.defl=0 yoffset.defl=0
+    export function drawBitmap(bitmap: number[], colour: number, xoffset: number, yoffset: number): void {
+        for (let k = MatrixWidth - 1; k >= 0; k--) {
+            if (!((xoffset + k) % 2)) {
+                for (let j = 0; j < MatrixHeigth; j++) {
+                    if ((bitmap[j] & (0x01 << (MatrixWidth - k - 1)))) {
+                        matrix.setPixelColor(((k * MatrixHeigth) + (xoffset * MatrixHeigth) + j), (colour))
+                    }
+                }
+            }
+            else {
+                for (let j = 0; j < MatrixHeigth; j++) {
+                    if ((bitmap[j] & (0x01 << (MatrixWidth - k - 1)))) {
+                        matrix.setPixelColor(((k * MatrixHeigth) + (xoffset * MatrixHeigth) + ((MatrixHeigth - 1) - j)), (colour))
+                    }
+                }
+            }
+        }
+        matrix.show()
     }
     /**
     * Gets the direction to scroll in
