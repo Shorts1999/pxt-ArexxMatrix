@@ -1,7 +1,8 @@
 {
-    "name": "pxt-rgb-matrix",
-    "version": "0.0.0",
-    "description": "",
+    "name": "ArexxMatrix",
+    "version": "0.8.1",
+    "description": "Support for NeoPixel Matrix",
+    "license": "MIT",
     "dependencies": {
         "core": "*",
         "radio": "*",
@@ -16,5 +17,5 @@
     ],
     "public": false,
     "preferredEditor": "tsprj",
-    "installedVersion": "workspace:6f05ee80-1f89-4df8-4c6d-a26d53b5f558"
+    "installedVersion": "workspace:12c4cd5e-1f3d-444f-cbde-ba57cecc0bec"
 }
