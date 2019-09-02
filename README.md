@@ -15,9 +15,9 @@
 Read more at https://makecode.microbit.org/extensions
 
 
-## Arexx 8x32 RGB matrix Micro:Bit extension
+## Arexx RGB matrix Micro:Bit extension
 
-this extension for BBC Micro:Bit makecode adds support for 8x32 RGB WS2812b/Neopixel displays with a zigzag pattern lining.
+this extension for BBC Micro:Bit makecode adds support for RGB WS2812b/Neopixel displays with a zigzag pattern lining.
 
 To start using the extension put the block "maak matrix" in the startup command in the block editor. this initializes the display and sets up the NeoPixel object.
 
