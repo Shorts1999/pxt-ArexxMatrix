@@ -14,7 +14,7 @@ enum Directions {
 //% color=#AA00AA weight=50 icon="\uf110" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
-    let matrix: neopixel.Strip;
+    let matrix: neopixel.Strip
     let MatrixHeigth: number
     let MatrixWidth: number
     /** 
@@ -25,7 +25,7 @@ namespace ArexxMatrix {
     //% Heigth.defl=10 Width.defl=20 PinNumber.defl=DigitalPin.P0
     export function createMatrix(Heigth: number, Width: number, mode: NeoPixelMode, PinNumber: DigitalPin=DigitalPin.P0): void {
         if (!matrix) {
-            let matrix = neopixel.create(PinNumber, Heigth * Width, mode)
+            matrix = neopixel.create(PinNumber, Heigth * Width, mode)
             ArexxMatrix.Brightness(32)
             MatrixHeigth = Heigth
             MatrixWidth = Width
