@@ -15,12 +15,12 @@ namespace ArexxMatrix {
     /** 
      * genereert het neopixel object, wanneer deze nog niet bestaat
      */
-    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode"
+    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode| op pin %Pin"
     //%weight=100
     //% Heigth.defl=8 Width.defl=32
-    export function createMatrix(Heigth: number = 8, Width: number = 32, mode: NeoPixelMode): void {
+    export function createMatrix(Heigth: number = 8, Width: number = 32, mode: NeoPixelMode,Pin: DigitalPin): void {
         if (!matrix) {
-            matrix = neopixel.create(DigitalPin.P0, Heigth * Width, mode)
+            matrix = neopixel.create(Pin, Heigth * Width, mode)
             ArexxMatrix.Brightness(32)
             MatrixHeigth = Heigth
             MatrixWidth = Width
