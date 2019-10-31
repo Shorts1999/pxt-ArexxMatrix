@@ -3,6 +3,7 @@ Arexx Engineering Micro:Bit extension for WS2812b/NeoPixel Matrixes
 Author: Sjors Smit
 Version: 1.0; 31/10/2019
 */
+
 enum Directions {
     //% block=links
     links = 0,
@@ -19,17 +20,19 @@ namespace ArexxMatrix {
     /** 
      * genereert het neopixel object, wanneer deze nog niet bestaat
      */
-    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode| op pin %Pin"
+    //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode| op pin %PinNumber"
     //%weight=100
-    //% Heigth.defl=8 Width.defl=32
-    export function createMatrix(Heigth: number = 8, Width: number = 32, mode: NeoPixelMode, Pin: DigitalPin): void {
+    //% Heigth.defl=10 Width.defl=20 PinNumber.defl=DigitalPin.P0
+    export function createMatrix(Heigth: number, Width: number, mode: NeoPixelMode, PinNumber: DigitalPin): void {
         if (!matrix) {
-            matrix = neopixel.create(Pin, Heigth * Width, mode)
+            matrix = neopixel.create(PinNumber, Heigth * Width, mode)
             ArexxMatrix.Brightness(32)
             MatrixHeigth = Heigth
             MatrixWidth = Width
         }
     }
+
+
     //%block
     //%advanced=true
     //%weigth=1
