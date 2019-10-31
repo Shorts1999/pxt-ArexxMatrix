@@ -23,7 +23,7 @@ namespace ArexxMatrix {
     //%block="maak matrix met hoogte %Heigth| en breedte %Width| met RGB type %mode| op pin %PinNumber"
     //%weight=100
     //% Heigth.defl=10 Width.defl=20 PinNumber.defl=DigitalPin.P0
-    export function createMatrix(Heigth: number, Width: number, mode: NeoPixelMode, PinNumber: DigitalPin): void {
+    export function createMatrix(Heigth: number, Width: number, mode: NeoPixelMode, PinNumber: DigitalPin=DigitalPin.P0): void {
         if (!matrix) {
             matrix = neopixel.create(PinNumber, Heigth * Width, mode)
             ArexxMatrix.Brightness(32)
