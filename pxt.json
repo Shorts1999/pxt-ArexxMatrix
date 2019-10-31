@@ -1,6 +1,6 @@
 {
-    "name": "AREXX Micro",
-    "version": "1.1",
+    "name": "AREXX Microbit Display Uitbreiding",
+    "version": "1.0",
     "description": "Support for NeoPixel Matrix",
     "license": "MIT",
     "dependencies": {

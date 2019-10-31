@@ -1,7 +1,7 @@
 /*
 Arexx Engineering Micro:Bit extension for WS2812b/NeoPixel Matrixes
 Author: Sjors Smit
-Version: 1.1; 31/10/2019
+Version: 1.0; 31/10/2019
 */
 enum Directions {
     //% block=links
@@ -10,7 +10,7 @@ enum Directions {
     rechts = 1
 }
 
-//% color=#AA00AA weight=50 icon="f2a1" block="Arexx Matrix"
+//% color=#AA00AA weight=50 icon="\uf110" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
     let matrix: neopixel.Strip;
