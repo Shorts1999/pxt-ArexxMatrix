@@ -174,7 +174,7 @@ namespace ArexxMatrix {
         matrix.show()
     }
     /**
-    * Gets the direction to scroll in
+    * Geeft aan in welke richting de tekst moet scrollen
     */
     //% weight=2 blockGap=8
     //% blockId="ArexxMatrix_Direction" block="%direction"
@@ -183,14 +183,14 @@ namespace ArexxMatrix {
         return direction;
     }
 
-    //%block="zet Matrix helderheid (0-255) %setPoint" setPoint.max=255 setPoint.min=0 setPoint.defl=128
-    //% 
+    //%block="zet Matrix helderheid (0-255) %setPoint" 
+    //%setPoint.max=255 setPoint.min=0 setPoint.defl=32
     export function Brightness(setPoint: number) {
         matrix.setBrightness(setPoint)
     }
 
     /**
-     * Converts red, green, blue channels into a RGB color
+     * Zet rood, groen en blauw waarden om in een RGB-kleur
      * @param red value of the red channel between 0 and 255. eg: 255
      * @param green value of the green channel between 0 and 255. eg: 255
      * @param blue value of the blue channel between 0 and 255. eg: 255
