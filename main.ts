@@ -11,7 +11,7 @@ enum Directions {
     rechts = 1
 }
 
-//% color=#AA00AA weight=50 icon="\uf110" block="Arexx Matrix"
+//% color=#AA00AA weight=50 icon="\uf00a" block="Arexx Matrix"
 //% groups=['LED matrix']
 namespace ArexxMatrix {
     let matrix: neopixel.Strip
