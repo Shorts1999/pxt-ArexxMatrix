@@ -1,7 +1,7 @@
 /*
 Arexx Engineering Micro:Bit extension for WS2812b/NeoPixel Matrixes
 Author: Sjors Smit
-Version: 1.0; 31/10/2019
+Version: 1.2; 9/11/2019
 */
 
 enum Directions {
@@ -59,7 +59,6 @@ namespace ArexxMatrix {
     //% weight=1
     export function legen(): void {
         matrix.clear()
-        matrix.show()
     }
 
     /**
@@ -171,7 +170,6 @@ namespace ArexxMatrix {
                 }
             }
         }
-        matrix.show()
     }
     /**
     * Geeft aan in welke richting de tekst moet scrollen
