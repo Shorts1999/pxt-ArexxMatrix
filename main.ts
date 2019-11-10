@@ -161,7 +161,7 @@ namespace ArexxMatrix {
                 //Value of j to select the values in the array to draw on the y-axis
                 for (let j = 0; j < heigth; j++) {
                     //only draw a pixel when there is a '1' in the bitmap, without drawing a "black" pixel when there is a '0', allowing layering of bitmaps.
-                    if ((bitmap[j] & (0b1 << width - k-1))) {
+                    if ((bitmap[j] & (0b1 << width - k-1))&&((j+yoffset)<MatrixHeigth)) {
                         //Draw the actual pixel at the position determined by the k, j , xoffset and yoffset values.
                         matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + j + yoffset), colour)
                     }
@@ -170,7 +170,7 @@ namespace ArexxMatrix {
             //Drawing the odd lines top to bottom.
             else {
                 for (let j = 0; j < heigth; j++) {
-                    if ((bitmap[j] & (0b1 << width - k-1))) {
+                    if ((bitmap[j] & (0b1 << width - k-1)) &&((yoffset+j)<MatrixHeigth)) {
                         matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + (MatrixHeigth - j - yoffset-1)), colour)
                     }
                 }
