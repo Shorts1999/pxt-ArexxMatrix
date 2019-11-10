@@ -171,7 +171,7 @@ namespace ArexxMatrix {
             else {
                 for (let j = 0; j < heigth; j++) {
                     if ((bitmap[j] & (0b1 << width - k-1))) {
-                        matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + (MatrixHeigth - j - yoffset)), colour)
+                        matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + (MatrixHeigth - j - yoffset-1)), colour)
                     }
                 }
             }
