@@ -153,19 +153,25 @@ namespace ArexxMatrix {
     //%colour.shadow="Matrix_rgb"
     //%weigth=100
     //%xoffset.defl=0 yoffset.defl=0
-    export function drawBitmap(bitmap: number[], colour: number, xoffset: number, yoffset: number): void {
-        for (let k = MatrixWidth - 1; k >= 0; k--) {
+    export function drawBitmap(bitmap: number[], width: number, heigth: number, colour: number, xoffset: number, yoffset: number): void {
+        //Setting end value of k to equal the width of the image to shift the bitmask to the correct position. for drawing the x-axis
+        for (let k = 0; k < width; k++) {
+            //Due to the zig-zag pattern of the matrix every odd value on the matrix has to be drawn from bottom to top, and the others top to bottom.
             if (!((xoffset + k) % 2)) {
-                for (let j = 0; j < MatrixHeigth; j++) {
-                    if ((bitmap[j] & (0x01 << (MatrixWidth - k - 1)))) {
-                        matrix.setPixelColor(((k * MatrixHeigth) + (xoffset * MatrixHeigth) + j), (colour))
+                //Value of j to select the values in the array to draw on the y-axis
+                for (let j = 0; j < heigth; j++) {
+                    //only draw a pixel when there is a '1' in the bitmap, without drawing a "black" pixel when there is a '0', allowing layering of bitmaps.
+                    if ((bitmap[j] & (0b1 << width - k))) {
+                        //Draw the actual pixel at the position determined by the k, j , xoffset and yoffset values.
+                        matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + j + yoffset), colour)
                     }
                 }
             }
+            //Drawing the odd lines top to bottom.
             else {
-                for (let j = 0; j < MatrixHeigth; j++) {
-                    if ((bitmap[j] & (0x01 << (MatrixWidth - k - 1)))) {
-                        matrix.setPixelColor(((k * MatrixHeigth) + (xoffset * MatrixHeigth) + ((MatrixHeigth - 1) - j)), (colour))
+                for (let j = 0; j < heigth; j++) {
+                    if ((bitmap[j] & (0b1 << width - k))) {
+                        matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + (MatrixHeigth - j - yoffset)), colour)
                     }
                 }
             }
