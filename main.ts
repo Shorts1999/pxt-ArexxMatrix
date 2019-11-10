@@ -153,7 +153,11 @@ namespace ArexxMatrix {
     //%colour.shadow="Matrix_rgb"
     //%weigth=100
     //%xoffset.defl=0 yoffset.defl=0
-    export function drawBitmap(bitmap: number[], width: number, heigth: number, colour: number, xoffset: number, yoffset: number): void {
+    export function drawBitmap(bitmap: number[], width: number, heigth: number, colour: number, xoffset: number, yoffset: number, doMirror:boolean=false): void {
+        let mirrored:number=0
+        if(doMirror){
+            let mirrored=1
+        }
         //Setting end value of k to equal the width of the image to shift the bitmask to the correct position. for drawing the x-axis
         for (let k = 0; k < width; k++) {
             //Due to the zig-zag pattern of the matrix every odd value on the matrix has to be drawn from bottom to top, and the others top to bottom.
@@ -163,7 +167,7 @@ namespace ArexxMatrix {
                     //only draw a pixel when there is a '1' in the bitmap, without drawing a "black" pixel when there is a '0', allowing layering of bitmaps.
                     if ((bitmap[j] & (0b1 << width - k-1))&&((j+yoffset)<MatrixHeigth)&&((yoffset+j)>=0)) {
                         //Draw the actual pixel at the position determined by the k, j , xoffset and yoffset values.
-                        matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + j + yoffset), colour)
+                        matrix.setPixelColor((((k + xoffset + ((width-k)*mirrored)) * MatrixHeigth) + j + yoffset), colour)
                     }
                 }
             }
@@ -171,7 +175,7 @@ namespace ArexxMatrix {
             else {
                 for (let j = 0; j < heigth; j++) {
                     if ((bitmap[j] & (0b1 << width - k-1)) &&((yoffset+j)<MatrixHeigth)&&((yoffset+j)>=0)) {
-                        matrix.setPixelColor((((k + xoffset) * MatrixHeigth) + (MatrixHeigth - j - yoffset-1)), colour)
+                        matrix.setPixelColor(((((k + xoffset)+((width - k) * mirrored)) * MatrixHeigth) + (MatrixHeigth - j - yoffset-1)), colour)
                     }
                 }
             }
