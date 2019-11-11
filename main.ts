@@ -154,10 +154,12 @@ namespace ArexxMatrix {
     //%weigth=100
     //%xoffset.defl=0 yoffset.defl=0
     export function drawBitmap(bitmap: number[], width: number, heigth: number, colour: number, xoffset: number, yoffset: number, doMirror:boolean=false): void {
-        let mirrored:number=1
+        let mirrored=1
+        /*
         if(doMirror){
             mirrored=1
         }
+        */
         //Setting end value of k to equal the width of the image to shift the bitmask to the correct position. for drawing the x-axis
         for (let k = 0; k < width; k++) {
             //Due to the zig-zag pattern of the matrix every odd value on the matrix has to be drawn from bottom to top, and the others top to bottom.
