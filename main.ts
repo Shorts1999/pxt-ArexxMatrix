@@ -167,7 +167,7 @@ namespace ArexxMatrix {
                     //only draw a pixel when there is a '1' in the bitmap, without drawing a "black" pixel when there is a '0', allowing layering of bitmaps.
                     if ((bitmap[j] & (0b1 << (width - k-1)))&&((j+yoffset)<MatrixHeigth)&&((yoffset+j)>=0)) {
                         //Draw the actual pixel at the position determined by the k, j , xoffset and yoffset values.
-                        matrix.setPixelColor(((((k*~mirrored + xoffset) + ((width-k-1)*mirrored)) * MatrixHeigth) + j + yoffset), colour)
+                        matrix.setPixelColor((((((mirrored-1)*(-k) + xoffset) + ((width-k-1)*mirrored)) * MatrixHeigth) + j + yoffset), colour)
                     }
                 }
             }
@@ -175,7 +175,7 @@ namespace ArexxMatrix {
             else {
                 for (let j = 0; j < heigth; j++) {
                     if ((bitmap[j] & (0b1 << (width - k-1))) &&((yoffset+j)<MatrixHeigth)&&((yoffset+j)>=0)) {
-                        matrix.setPixelColor(((((k*~mirrored + xoffset)+((width - k-1)*mirrored)) * MatrixHeigth) + (MatrixHeigth - j - yoffset-1)), colour)
+                        matrix.setPixelColor((((((mirrored-1)*(-k) + xoffset)+((width - k-1)*mirrored)) * MatrixHeigth) + (MatrixHeigth - j - yoffset-1)), colour)
                     }
                 }
             }
