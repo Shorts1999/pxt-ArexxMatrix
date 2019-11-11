@@ -1,7 +1,7 @@
 /*
 Arexx Engineering Micro:Bit extension for WS2812b/NeoPixel Matrixes
 Author: Sjors Smit
-Version: 1.2; 9/11/2019
+Version: 1.2; 11/11/2019
 */
 
 enum Directions {
@@ -157,6 +157,9 @@ namespace ArexxMatrix {
         let mirrored=0
         if(doMirror){
             mirrored=1
+        }
+        if(width % 2){
+            width++
         }
         //Setting end value of k to equal the width of the image to shift the bitmask to the correct position. for drawing the x-axis
         for (let k = 0; k < width; k++) {
