@@ -154,7 +154,7 @@ namespace ArexxMatrix {
     //%weigth=100
     //%xoffset.defl=0 yoffset.defl=0
     export function drawBitmap(bitmap: number[], width: number, heigth: number, colour: number, xoffset: number, yoffset: number, doMirror:boolean=false): void {
-        let mirrored:number=0
+        let mirrored:number=1
         if(doMirror){
             mirrored=1
         }
