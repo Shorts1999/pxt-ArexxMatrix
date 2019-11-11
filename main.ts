@@ -161,7 +161,7 @@ namespace ArexxMatrix {
         //Setting end value of k to equal the width of the image to shift the bitmask to the correct position. for drawing the x-axis
         for (let k = 0; k < width; k++) {
             //Due to the zig-zag pattern of the matrix every odd value on the matrix has to be drawn from bottom to top, and the others top to bottom.
-            if (!((xoffset + k) % 2)) {
+            if (!((xoffset + k+ mirrored) % 2)) {
                 //Value of j to select the values in the array to draw on the y-axis
                 for (let j = 0; j < heigth; j++) {
                     //only draw a pixel when there is a '1' in the bitmap, without drawing a "black" pixel when there is a '0', allowing layering of bitmaps.
