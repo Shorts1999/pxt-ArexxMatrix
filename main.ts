@@ -219,7 +219,7 @@ namespace ArexxMatrix {
     }
 
 
-    function getLettermap(l: string) {
+    export function getLettermap(l: string) {
         switch (l) {
             case "a": return [
                 0x00,
