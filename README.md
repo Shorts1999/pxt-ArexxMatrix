@@ -17,7 +17,7 @@ Read more at https://makecode.microbit.org/extensions
 
 ## Arexx RGB matrix Micro:Bit extension
 
-this extension for BBC Micro:Bit makecode adds support for RGB WS2812b/Neopixel displays with a zigzag pattern lining.
+this extension for BBC Micro:Bit makecode adds support for RGB WS2812b/Neopixel displays with a zigzag pattern lining. The top left pixel should be the first pixel in the strip.
 
 To start using the extension put the block "maak matrix" in the startup command in the block editor. this initializes the display and sets up the NeoPixel object.
 
@@ -27,7 +27,7 @@ The color selection uses a RGB scale from 0-255 by default. But the preset color
 
 The "scroll Text" block is completely standalone and does not require a "show()" command. the setpixel requires a arexxMatrix.showMatrix() command ("Matrix wijzigingen weergeven" block)
 
-The "Matrix legen"/"ArexxMatrix.clearMatrix()" command can be used to turn off all the pixels in the matrix display.
+The "Matrix legen"/"ArexxMatrix.clearMatrix()" command can be used to turn off all the pixels in the matrix display. (Does require a seperate Matrix.show() call to update display)
 
 ## License
 The Arexx "ArexxMatrix" Micro:Bit extension is licensed under the MIT license. see file LICENSE for more information.
